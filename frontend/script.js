@@ -5,6 +5,9 @@ const newChatButton = document.getElementById("new-chat");
 
 const api_url = "http://127.0.0.1:8000/api/query";
 
+
+const arabicRegex = /[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF]+/;
+
 let messages = JSON.parse(localStorage.getItem("chatMessages")) || [];
 
 function saveMessagesToLocalStorage() {
@@ -23,7 +26,6 @@ function addDefaultMessage() {
     `;
     messageWrapper.classList.add("chat", "incoming");
     chatMessagesDiv.appendChild(messageWrapper);
-    chatMessagesDiv.scrollTop = chatMessagesDiv.scrollHeight; 
 }
 
 function addTypingAnimation() {
@@ -42,7 +44,6 @@ function addTypingAnimation() {
     `;
     typingWrapper.classList.add("chat", "incoming", "typing-animation");
     chatMessagesDiv.appendChild(typingWrapper);
-    // chatMessagesDiv.scrollTop = chatMessagesDiv.scrollHeight;
 
     return typingWrapper; 
 }
@@ -62,20 +63,26 @@ function addMessageToChat(sender, messageContent, messageClass, source = "") {
     } else if (sender === "AI") {
         senderIcon = '<i class="fa-solid fa-robot" style="color: #00BFFF;"></i>';
     }
+    const textDirection = arabicRegex.test(messageContent) ? "rtl" : "ltr";
     
     messageWrapper.innerHTML = `
         <div class="chat-content">
-            <div class="chat-details">
+            <div class="chat-details ${textDirection}">
                 <p>${senderIcon}  ${messageContent}</p>
                 ${source ? `<p class="message-source">Sources: ${source}</p>` : ""}
             </div>
         </div>
     `;
-    
+
     messageWrapper.classList.add("chat", messageClass);
     chatMessagesDiv.appendChild(messageWrapper);
-    chatMessagesDiv.scrollTop = chatMessagesDiv.scrollHeight; 
+    scrollToBottom();
 }
+function scrollToBottom() {
+    debugger
+    let bottomElement = chatMessagesDiv.lastElementChild
+    bottomElement.scrollIntoView({ behavior: 'smooth', block: 'end' });
+  }
 
 async function sendMessage() {
     const userQuery = userQueryInput.value;
