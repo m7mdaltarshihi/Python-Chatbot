@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Chatbot</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+    <div class="container-fluid d-flex justify-content-center align-items-center min-vh-100">
+        <div class="chat-container col-lg-6 col-md-8 col-10">
+            <div class="chat-card bg-dark text-light shadow-lg">
+                <div class="card-body p-4">
+                    <h4 class="card-title text-center mb-4 text-uppercase fw-bold">AI Python Assistant</h4>
+                    <div class="chat-box mb-4 p-4 rounded position-relative">
+                        <div id="chat-messages" class="chat-messages"></div>
+                        <button id="new-chat" class="btn btn-secondary fw-bold position-fixed top-0 end-0 mt-2 me-2">
+                            <i class="fa-regular fa-pen-to-square"></i> New Chat
+                        </button>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <input type="text" id="user-query" class="form-control me-2 text-light bg-dark border-light" placeholder="Type your message..." />
+                        <button id="send-message" class="btn btn-light fw-bold">Send</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+    <script src="https://kit.fontawesome.com/a42eddce3f.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
